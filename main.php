@@ -58,9 +58,9 @@ class Date{
                     $difference -=1;
                 } else {
                     $desks += 1;
-                    $str .= ($saleDay) . "-е ";
-                    $str .= ($this::MONTH_NAMES[$i]) . " ";
-                    $str .= ($year);
+                    $str .= ($saleDay) . "-е "; //день
+                    $str .= ($this::MONTH_NAMES[$i]) . " "; //месяц
+                    $str .= ($year); //год
                     $str .= "  ";
                     $difference +=1;
                 }
