@@ -15,23 +15,23 @@ class Date{
 
     public function getAllDatesUntilYear($year){
         if ($year < $this::STARTING_YEAR) {
-            return $this::YEAR_TOO_FEW_MSG;
+            return $this::YEAR_TOO_FEW_MSG; //вывод ошибки о неправильном вводе даты
         }
         $this->lastMonthDay = $this::STARTING_DAY;
         $str = "";
         for ($i = $this::STARTING_YEAR; $i <= $year; $i++){
-
             $str .= $this->getAllDatesYear( $i );
         }
-        
         $this->reset();
         return $str;
     }
+    //возврат полей объекта к первоначальному значению
     private function reset(){
         $this->chairs = 0;
         $this->desks = 0;
         $this->lastMonthDay = 0;
     }
+    // получение строки с датами акций на столы за конкретный год
     private function getAllDatesYear($year){
         $str = "";
         $chairs = 0;
@@ -47,6 +47,11 @@ class Date{
             if ($saleDay == 0){
                 $saleDay += $this::DAYS_IN_WEEK;
             }
+            /*если за все предыдущие годы в сумме было проведено X акций на столы и Y акций на стулья,
+            и (Max = max(Y,X), Min = min(Y,X)),
+            то для первых (Max - Min) месяцев текущего года акции будут проводиться на тот товар,
+            на который было (Min) акций. После того как количество акционных дней на оба товара сравнялось,
+            весь оставший год, товар для акции выбирается по обычному правилу(чет/нечет)*/
             if($difference != 0){
                 if ($difference > 0){
                     $chairs += 1;
